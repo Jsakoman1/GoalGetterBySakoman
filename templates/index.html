@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Financial Goals Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h1>Financial Goals</h1>
+<div>
+    <h2>Add New Goal</h2>
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Goal Name" required>
+        <input type="number" name="total_amount" placeholder="Total Amount" required>
+        <button type="submit">Add Goal</button>
+    </form>
+</div>
+<div>
+    <h2>Goals</h2>
+    <ul>
+        {% for goal in goals %}
+            <li>
+                {{ goal.name }} - {{ goal.current_amount }} / {{ goal.total_amount }}
+                <a href="/edit/{{ goal.id }}">Edit</a>
+                <a href="/delete/{{ goal.id }}">Delete</a>
+                {% if not goal.is_achieved %}
+                    <form action="/edit/{{ goal.id }}" method="post" style="display: inline;">
+                        <input type="hidden" name="is_achieved" value="on">
+                        <button type="submit">Mark as Achieved</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <h2>Progress</h2>
+    <!-- graph logic -->
+    <p>Total Funded: {{ total_funded }} / {{ total_goals }}</p>
+</div>
+</body>
+</html>
