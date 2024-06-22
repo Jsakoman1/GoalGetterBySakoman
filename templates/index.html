@@ -43,6 +43,27 @@
         </section>
 
         <section>
+            <h2>Filter and Sort Goals</h2>
+            <form method="get" action="/">
+                <label for="sort_by">Sort By:</label>
+                <select name="sort_by" id="sort_by">
+                    <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Name</option>
+                    <option value="total_amount" {% if sort_by == 'total_amount' %}selected{% endif %}>Total Amount</option>
+                    <option value="current_amount" {% if sort_by == 'current_amount' %}selected{% endif %}>Current Amount</option>
+                </select>
+                
+                <label for="filter_by">Filter By:</label>
+                <select name="filter_by" id="filter_by">
+                    <option value="all" {% if filter_by == 'all' %}selected{% endif %}>All</option>
+                    <option value="completed" {% if filter_by == 'completed' %}selected{% endif %}>Completed</option>
+                    <option value="in_progress" {% if filter_by == 'in_progress' %}selected{% endif %}>In Progress</option>
+                </select>
+                
+                <button type="submit">Apply</button>
+            </form>
+        </section>
+
+        <section>
             <h2>Goals</h2>
             <ul class="goal-list">
                 {% for goal in goals %}

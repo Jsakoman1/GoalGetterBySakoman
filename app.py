@@ -20,7 +20,16 @@ def create_tables():
 # Route to display all goals and progress
 @app.route('/')
 def index():
-    goals = FinancialGoal.query.all()
+    sort_by = request.args.get('sort_by', 'name')
+    filter_by = request.args.get('filter_by', 'all')
+
+    if filter_by == 'all':
+        goals = FinancialGoal.query.order_by(sort_by).all()
+    elif filter_by == 'completed':
+        goals = FinancialGoal.query.filter(FinancialGoal.current_amount >= FinancialGoal.total_amount).order_by(sort_by).all()
+    elif filter_by == 'in_progress':
+        goals = FinancialGoal.query.filter(FinancialGoal.current_amount < FinancialGoal.total_amount).order_by(sort_by).all()
+
     total_funded = sum(goal.current_amount for goal in goals)
     total_goals = sum(goal.total_amount for goal in goals)
 
@@ -35,7 +44,7 @@ def index():
     else:
         total_progress = 0
 
-    return render_template('index.html', goals=goals, total_progress=total_progress)
+    return render_template('index.html', goals=goals, total_progress=total_progress, sort_by=sort_by, filter_by=filter_by)
 
 # Route to add a new goal
 @app.route('/add', methods=['GET', 'POST'])
