@@ -73,4 +73,4 @@ def delete_goal(goal_id):
 if __name__ == '__main__':
     with app.app_context():
         create_tables()  # Create tables within the application context
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5001)
