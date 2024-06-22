@@ -28,11 +28,11 @@ cd GoalGetterBySakoman
 docker-compose up --build
 
 ### Access the Application
-Once the containers are running, the application will be available at: http://localhost:5000
+Once the containers are running, the application will be available at: http://localhost:5001
 
 ## Usage
 
-Open your web browser and go to http://localhost:5000.
+Open your web browser and go to http://localhost:5001.
 Use the application to add, edit, and manage your financial goals.
 Track the progress of each goal and view overall progress.
 
