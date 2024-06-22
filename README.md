@@ -25,7 +25,8 @@ cd GoalGetterBySakoman
 
 ### Build and Run the Docker Containers
 
-docker-compose up --build
+docker build -t goalgetter-app .
+docker run -d -p 5001:5001 --name goalgetter-container goalgetter-app
 
 ### Access the Application
 Once the containers are running, the application will be available at: http://localhost:5001
